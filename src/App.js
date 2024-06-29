@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SalesForm from "./components/SaleForm";
+import SalesChart from "./components/Chart";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const [salesData, setSalesData] = useState([]);
+
+  const handleFormSubmit = (data) => {
+    setSalesData(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Games Sold per Month</h1>
+      <SalesForm onSubmit={handleFormSubmit} />
+      {salesData.length > 0 && <SalesChart data={salesData} />}
     </div>
   );
-}
+};
 
 export default App;
